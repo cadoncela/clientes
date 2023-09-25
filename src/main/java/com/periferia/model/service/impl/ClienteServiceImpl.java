@@ -26,12 +26,19 @@ public class ClienteServiceImpl implements IClienteService {
 
 	@Override
 	public List<Cliente> findAllByName() {		
-		return dao.findAllByOrderByNombreCompleto();
+		List<Cliente> lsClientes = new ArrayList();
+		//lsClientes.addAll(dao.findAll());
+		lsClientes.addAll(dao.findAllByOrderByNombreCompleto());		
+		return lsClientes;
 	}
-
+	
 	@Override
 	public List<Cliente> findAllByAge() {
-		return dao.findAllByOrderByNacimiento();
+		List<Cliente> lsClientes = new ArrayList();
+		//lsClientes.addAll(dao.findAll());
+		lsClientes.addAll(dao.findAllByOrderByNacimiento());	
+		
+		return lsClientes;
 	}
 
 	@Override
@@ -48,7 +55,8 @@ public class ClienteServiceImpl implements IClienteService {
 	@Override
 	public List<Cliente> findAll() {
 		List<Cliente> lsClientes = new ArrayList();
-		lsClientes.addAll(dao.findAll());
+		//lsClientes.addAll(dao.findAll());
+		lsClientes.addAll(dao.findAllByOrderByNombreCompleto());
 		Cliente c = lsClientes.get(0);
 		ObjectMapper mapper = new ObjectMapper();
 		try {

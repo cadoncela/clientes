@@ -38,9 +38,17 @@ private static final Logger LOGGER = Logger.getLogger(ClienteController.class.ge
 	
 	@GetMapping("/clientes")
     public List<Cliente> findAll() {
-		LOGGER.log(Level.INFO, "[clientes].[ClienteController.findAll]. Entarndo a findAll ClienteController. {0} ");	
+		LOGGER.log(Level.INFO, "[clientes].[ClienteController.findAll]. Entarndo a findAll. {0} ");	
         List <Cliente> lsClientes = new ArrayList<>();
-        lsClientes.addAll(service.findAll());                
+        lsClientes.addAll(service.findAllByName());                
+        return lsClientes;
+    }
+	
+	@GetMapping("/clientesByNacimiento")
+    public List<Cliente> findAllByNacimiento() {
+		LOGGER.log(Level.INFO, "[clientes].[ClienteController.clientesByNacimiento]. Entarndo a clientesByNacimiento. {0} ");	
+        List <Cliente> lsClientes = new ArrayList<>();
+        lsClientes.addAll(service.findAllByAge());                
         return lsClientes;
     }
 	
