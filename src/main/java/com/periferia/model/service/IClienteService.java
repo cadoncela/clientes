@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.periferia.model.entity.Cliente;
 import com.periferia.web.dto.CountPromResponseDTO;
+import com.periferia.web.dto.User;
 
 public interface IClienteService {
 	
@@ -16,5 +17,7 @@ public interface IClienteService {
 	List<CountPromResponseDTO> countAndProm();
 	
 	Cliente save(Cliente c);
+	
+	User findByCorreo(String correo);
 
 }

@@ -11,5 +11,7 @@ public interface IClientesDao extends JpaRepository<Cliente, Long> {
 	public List<Cliente> findAllByOrderByNombreCompleto();
 	
 	public List<Cliente> findAllByOrderByNacimiento();
+	
+	public Cliente findByCorreo(String correo);
 
 }

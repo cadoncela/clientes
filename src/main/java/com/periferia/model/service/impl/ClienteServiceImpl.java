@@ -17,10 +17,13 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.periferia.auth.TokenGenerator;
 import com.periferia.model.dao.IClientesDao;
 import com.periferia.model.entity.Cliente;
 import com.periferia.model.service.IClienteService;
 import com.periferia.web.dto.CountPromResponseDTO;
+import com.periferia.web.dto.Payload;
+import com.periferia.web.dto.User;
 
 @Service
 public class ClienteServiceImpl implements IClienteService {
@@ -29,6 +32,9 @@ public class ClienteServiceImpl implements IClienteService {
 	
 	@Autowired
 	IClientesDao dao;
+	
+	@Autowired
+	private TokenGenerator tokenGenerator;
 
 	@Override
 	public List<Cliente> findAllByName() {		
@@ -99,6 +105,28 @@ public class ClienteServiceImpl implements IClienteService {
 		}
 		
 		return lsClientes;
+	}
+
+	@Override
+	public User findByCorreo(String correo) {
+		User response = new User();
+		Cliente c =  dao.findByCorreo(correo);
+		if (c != null) {
+			ObjectMapper mapper = new ObjectMapper();		
+			Payload payload = new Payload();
+			payload.setCorreo(c.getCorreo());
+			payload.setNombreCompleto(c.getNombreCompleto());
+			String payloadJson ="";
+			try {
+				payloadJson = mapper.writeValueAsString(payload);
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setToken(tokenGenerator.getJWTToken(payloadJson));
+			response.setUser(correo);
+		}
+		return response;
 	}
 
 }
