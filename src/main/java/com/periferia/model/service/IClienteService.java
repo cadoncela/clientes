@@ -3,6 +3,7 @@ package com.periferia.model.service;
 import java.util.List;
 
 import com.periferia.model.entity.Cliente;
+import com.periferia.web.dto.CountPromResponseDTO;
 
 public interface IClienteService {
 	
@@ -12,7 +13,7 @@ public interface IClienteService {
 	
 	List<Cliente> findAllByAge();
 	
-	List<String> countAndProm();
+	List<CountPromResponseDTO> countAndProm();
 	
 	Cliente save(Cliente c);
 

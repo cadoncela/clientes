@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.periferia.model.entity.Cliente;
 import com.periferia.model.service.impl.ClienteServiceImpl;
+import com.periferia.web.dto.CountPromResponseDTO;
 
 @CrossOrigin(origins = { "http://localhost:4200", "*" })
 @RestController
@@ -50,6 +51,12 @@ private static final Logger LOGGER = Logger.getLogger(ClienteController.class.ge
         List <Cliente> lsClientes = new ArrayList<>();
         lsClientes.addAll(service.findAllByAge());                
         return lsClientes;
+    }
+	
+	@GetMapping("/countAndProm")
+    public List<CountPromResponseDTO> findAllCountAndProm() {
+		LOGGER.log(Level.INFO, "[clientes].[ClienteController.findAllCountAndProm]. Entarndo a findAllCountAndProm. {0} ");		          
+        return service.countAndProm();
     }
 	
 	@PostMapping("/clientes")
